@@ -1,0 +1,63 @@
+<div *ngIf="childData != 'undefined'">
+  <div class="row well">
+
+    <div class="col-1">
+      <app-vote [Score]="childData?.score"></app-vote>
+    </div>
+    <div class="col-2">
+      <div *ngIf="childData?.thumbnail && childData?.thumbnail != 'undefined' &&  childData?.thumbnail != '' 
+        && childData?.thumbnail != 'self'">
+        <img class="thumbnail img-fluid img-thumbnail" [src]="childData?.thumbnail ? childData?.thumbnail : '../../assets/unknown.png'"
+          [style.height.px]="childData?.thumbnail_height ? childData?.thumbnail_height : 140" [style.width.px]="childData?.thumbnail_width ? childData?.thumbnail_width : 140"
+          onError="this.src='../../assets/unknown.png';" />
+      </div>
+      <div  class="thumbnail img-fluid img-thumbnail" *ngIf="!childData?.thumbnail ||  childData?.thumbnail == 'self'">
+        <img src="../../assets/unknown.png" [style.height.px]="140" [style.width.px]="140" />
+      </div>
+    </div>
+    <div class="col-9">
+      <span style="margin-right: 10px;">
+        <b> {{childData?.author }}</b>
+      </span>
+      <span style="margin-right: 10px;"> {{ childData?.num_comments }} comments</span>
+      <span> created at {{ childData?.created * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+      <span>
+        <div class="float-right">
+          <a *ngIf="childData" [routerLink]="['/feed',childData?.subreddit,childData?.name]" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"> </span> Back</a>
+        </div>
+      </span>
+      <br />
+      <span>
+        <h3> {{childData?.title}}</h3>
+      </span>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div *ngIf="selftextHTML">
+            <!-- <div [innerHTML]="selftextHTML"></div>  -->
+            <!-- <p id="test" [innerHTML]="selftextHTML"></p> -->
+          </div>
+
+          <div>
+            {{childData?.selftext}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="commentData != 'undefined'">
+  <app-comment-list [commentData]="commentData"></app-comment-list>
+</div>
+
+<div *ngIf="ShowNotFound">
+  <div class="shadow p-3 mb-5 bg-white rounded text-center">
+    <div>
+      <h3>
+        No Feed Comments Found, Please validate URL
+      </h3>
+    </div>
+  </div>
+</div>

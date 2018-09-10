@@ -1,0 +1,41 @@
+li {
+  list-style-type: none;
+  margin-left: 15px !important;
+  margin-top: 15px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.comment {
+  font-size: 12px;
+  color: gray;
+  margin-top: 3px;
+  text-align: left;
+}
+
+.commentbody {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.commentText {
+  padding: 5px 5px 1px 10px;
+  border-left: slategray solid 1px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.collapsable {
+  margin-left: 20px;
+  padding-top: 2 px;
+  cursor: pointer;
+}
+
+.collapsable:hover {
+  color: gray;
+  font-size: 16px;
+  font-weight: 500;
+}

@@ -1,0 +1,42 @@
+<div class="comment shadow p-3 mb-5 bg-white rounded">
+
+  <div class="row">
+    <div class="col-md-12">
+      <span class="collapsable" (click)="toggleComment()">
+        {{ CommentData?.hide_score == true ? "[+]" : "[-]" }}
+      </span>
+      <span style="margin-right: 10px;">
+        <b> {{CommentData?.author }}</b>
+      </span>
+      <span style="margin-right: 10px;"> {{ CommentData?.ups }} points</span>
+      <span> created at {{ CommentData?.created * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+    </div>
+  </div>
+  <div class="row" *ngIf="!CommentData?.hide_score">
+    <div class="col-md-1 text-center valign ">
+      <app-vote [Score]="CommentData?.score"></app-vote>
+    </div>
+    <div class="col-md-11 commentText">
+      <div class="row">
+        <div class="col-md-11 commentbody">
+          {{CommentData?.body}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11">
+          {{CommentData?.selftext}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="CommentData?.replies">
+
+    <div *ngFor="let commentsReply of CommentData?.replies.data.children">
+      <li>
+        <app-comment [comments]="commentsReply.data" *ngIf="commentsReply?.data">
+        </app-comment>
+      </li>
+    </div>
+  </div>
+</div>

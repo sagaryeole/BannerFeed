@@ -1,0 +1,31 @@
+<div *ngIf="child">
+  <div class="entry shadow p-3 mb-5 bg-white rounded">
+    <div class="row">
+      <div class="col-1 text-center">
+        <app-vote [Score]="child?.Score"></app-vote>
+      </div>
+      <div class="col-2 text-center">
+        <div *ngIf="child?.Thumbnail && child?.Thumbnail?.Url 
+        &&  child?.Thumbnail?.Url != '' && child?.Thumbnail?.Url != 'self'">
+          <img class="img-fluid" [src]="child?.Thumbnail?.Url" [style.height.px]="child?.Thumbnail?.Height ? child.Thumbnail?.Height : 120"
+            [style.width.px]="child.Thumbnail?.Width ? child?.Thumbnail?.Width : 120" onError="this.src='../../assets/unknown.png';" />
+        </div>
+        <div  *ngIf="!child?.Thumbnail?.Url ||  child?.Thumbnail?.Url == 'self'">
+          <img  class="img-fluid" src="../../assets/unknown.png" [style.height.px]="120" [style.width.px]="120" />
+        </div>
+      </div>
+      <div class="col-9 pointer" style="cursor: pointer" [routerLink]="['/feed/details', child?.SubReddit, child?.Id]">
+        <span style="margin-right: 10px;">
+          <b> {{child?.AuthorDetails?.AuthorName }}</b>
+        </span>
+        <span style="margin-right: 10px;"> {{ child?.Num_comments }} comments</span>
+        <span> created at {{ child?.Created * 1000 | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+        <span>
+          <h3>{{child?.Title}}</h3>
+        </span>
+        <span>
+          <a [routerLink]="child?.Permalink">Permalink</a>
+        </span>
+      </div>
+    </div>
+  </div>

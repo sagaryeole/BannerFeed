@@ -1,0 +1,17 @@
+.nav.navbar-nav {
+  font-size: 15px;
+}
+
+li>a.active {
+  color: #F97924
+}
+.headerlogo {
+  display: block;
+  border: none;
+  opacity: 1;
+  transition: opacity .3s ease;
+  margin-top: -6px;
+  height: 30px;
+  color: white;
+}
+

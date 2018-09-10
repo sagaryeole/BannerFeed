@@ -1,0 +1,34 @@
+.error input {
+  background-color: #E3C3C5;
+}
+
+.error ms-input-placeholder {
+  color: #999;
+}
+
+.error -webkit-input-placeholder {
+  color: #999;
+}
+
+em {
+  float: left;
+  color: #E05C65;
+  padding-left: 15px;
+  vertical-align: middle;
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.lazy{
+  color:gray;
+  padding-top: 3px;
+  font-size: 18px; 
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+.searchpanel {
+  padding-bottom: 2px;
+  
+}

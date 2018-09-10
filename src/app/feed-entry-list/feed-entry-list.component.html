@@ -1,0 +1,92 @@
+<div class="row shadow p-4 mb-5 bg-white rounded searchpanel">
+  <div class="col-md-2">
+    <div class="input-group inline-block">
+      <label class="lazy" for="checkLazy">&nbsp;Lazy?&nbsp; </label>
+      <input class="form-control lazy" style="width:35%;" type="checkbox" id="checkLazy" [(ngModel)]="lazy" value="lazy" (click)="fillURL()" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <form id="searchForm" [formGroup]="searchForm" (ngSubmit)="FetchEntry(searchForm.value)" autocomplete="on">
+      <div class="input-group">
+        <input class="form-control py-2" type="text" formControlName="FeedURL" value="https://www.reddit.com/r/sweden.json"
+          placeholder="Enter Reddit Feed URL" value="https://www.reddit.com/r/">
+        <span class="input-group-append">
+          <button class="btn btn-outline-secondary btn-default" type="submit" [disabled]="searchForm.invalid  || FeedURL.pristine">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2 text-left">
+    <em *ngIf="searchForm.invalid  && FeedURL.dirty">Invalid url</em>
+  </div>
+  <div class="col-md-1">
+    <div class="float-left">
+      <input type="button" value="Previous" class="btn btn-default" (click)="pageChange('Previous')" [disabled]="searchForm.invalid || (!before && !after)" />
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="form-group">
+      <select  class="form-control text-center" (change)="pagesizechange($event.target.value)" [(ngModel)]="pagesize"
+         name="defaultpagesize" item-width="20px">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-1 text-left">
+    <div class="form-group">
+      <input type="button" value="Next" class="btn btn-default" (click)="pageChange('Next')" [disabled]="searchForm.invalid ||  (!before && !after)">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dataSource">
+  <div *ngFor="let child of dataSource">
+    <div class="row">
+      <div class="col-12">
+        <app-feed-entry [child]="child"></app-feed-entry>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!dataSource && FeedURL.dirty && FeedURL.touched && !searchForm.touched">
+  <div class="shadow p-3 mb-5 bg-white rounded text-center">
+    <h1>
+      No Feeds Found
+    </h1>
+  </div>
+</div>
+<div *ngIf="ShowNotFound">
+  <div class="shadow p-3 mb-5 bg-white rounded text-center">
+    <div>
+      <h3>
+        No Feeds Found, Please validate URL
+      </h3>
+    </div>
+  </div>
+</div>
+
+<!-- <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+
+      <ng-container matColumnDef="description">
+        <div *matHeaderCellDef>Feeds</div>
+        <div class="description-cell" *matCellDef="let feed">
+            <img [src]="feed.Thumbnail.Url" [style.height.px]="feed.Thumbnail.Height" [style.width.px]="feed.Thumbnail.Width" />
+            <span>{{feed.Title}}</span> <br/>
+            <span>{{feed.AuthorDetails.AuthorName}}</span>
+            <br/>
+            <span> {{feed.Created}}</span><br/>
+            <span>{{feed.Num_comments}}</span><br/>
+            <span><a [routerLink]="feed.Permalink">{{feed.Permalink}}</a></span>
+        </div>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table> -->

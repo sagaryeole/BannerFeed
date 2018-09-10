@@ -1,0 +1,9 @@
+<!-- working -->
+
+<div *ngFor="let comments of commentData">
+    <ul>
+        <li>
+            <app-comment [comments]="comments.data"></app-comment>
+        </li>
+    </ul>
+</div>
